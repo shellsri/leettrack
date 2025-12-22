@@ -1,22 +1,40 @@
-import React, { useState } from 'react'
-import { Route, Routes } from 'react-router'
-import Header from './components/Header.jsx'
-import Dashboard from './pages/Dashboard.jsx'
-import Problems from './pages/Problems.jsx'
-import Analytics from './pages/Analytics.jsx'
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Problems from './pages/Problems.jsx';
+import Analytics from './pages/Analytics.jsx';
+import Home from './pages/Home.jsx';
+
 const App = () => {
-  const [problems, setproblems] = useState([])
+  const [problems, setproblems] = useState([]);
+
   return (
     <div>
-      <Header/>
+      <Header />
+
       <Routes>
-        <Route path ='/dashboard' element={<Dashboard problems = {problems}/>}></Route>
-        <Route path ='/problems' element={<Problems problems={problems} setproblems={setproblems}/>}></Route>
-        <Route path ='/analytics' element={<Analytics/>}></Route>
-        
+        <Route path="/" element={<Home />} />
+
+        <Route
+          path="/dashboard"
+          element={<Dashboard problems={problems} />}
+        />
+
+        <Route
+          path="/problems"
+          element={
+            <Problems
+              problems={problems}
+              setproblems={setproblems}
+            />
+          }
+        />
+
+        <Route path="/analytics" element={<Analytics />} />
       </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
