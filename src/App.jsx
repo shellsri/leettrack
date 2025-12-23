@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header.jsx';
-import Dashboard from './pages/Dashboard.jsx';
-import Problems from './pages/Problems.jsx';
-import Analytics from './pages/Analytics.jsx';
-import Home from './pages/home.jsx';
+import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
+import Header from "./components/Header";   // keep your header
+import Home from "./pages/home.jsx";
+import Dashboard from "./pages/Dashboard";
+import Problems from "./pages/Problems";
+import Analytics from "./pages/Analytics";
+
 const App = () => {
-  const [problems, setproblems] = useState([]);
+  const [problems, setproblems] = useState(() => {
+    const saved = localStorage.getItem("problems");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("problems", JSON.stringify(problems));
+  }, [problems]);
 
   return (
-    <div>
+    <>
       <Header />
 
       <Routes>
@@ -30,13 +39,14 @@ const App = () => {
           }
         />
 
-<Route
-  path="/analytics"
-  element={<Analytics problems={problems} />}
-/>
+        <Route
+          path="/analytics"
+          element={<Analytics problems={problems} />}
+        />
       </Routes>
-    </div>
+    </>
   );
 };
 
 export default App;
+
