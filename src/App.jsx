@@ -4,7 +4,7 @@ import Header from './components/Header.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Problems from './pages/Problems.jsx';
 import Analytics from './pages/Analytics.jsx';
-
+import Home from './pages/home.jsx';
 const App = () => {
   const [problems, setproblems] = useState([]);
 
